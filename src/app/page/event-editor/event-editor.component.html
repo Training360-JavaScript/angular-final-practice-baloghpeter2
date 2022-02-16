@@ -1,0 +1,57 @@
+<div *ngIf="event$ | async as event" class="form-group col-6 offset-3">
+  <form #eventForm="ngForm" autocomplete="off" (ngSubmit)="onUpdate(eventForm)">
+    <div class="form-group">
+      <label for="event-name">Name</label>
+      <input
+        [(ngModel)]="event.name"
+        required id="event-name"
+        type="text"
+        minlength="8"
+        class="form-control"
+        name="name">
+      <div class="error-message" [hidden]="eventForm.controls['name']?.valid">
+        Name should be at least 8 chars long.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="event-date">Date</label>
+      <input
+        [(ngModel)]="event.date"
+        required id="event-date"
+        type="text"
+        class="form-control"
+        name="date">
+        <div class="error-message" [hidden]="eventForm.controls['date']?.valid">
+          Date should not be empty
+        </div>
+    </div>
+    <div class="form-group">
+      <label for="event-time">Time</label>
+      <input
+        [(ngModel)]="event.time"
+        required id="event-time"
+        type="text"
+        class="form-control"
+        name="time">
+        <div class="error-message" [hidden]="eventForm.controls['time']?.valid">
+          Time should not be empty
+        </div>
+    </div>
+    <div class="form-group">
+      <label for="event-location">Location</label>
+      <input
+        [(ngModel)]="event.location"
+        required
+        id="event-location"
+        type="text"
+        class="form-control"
+        name="location">
+        <div class="error-message" [hidden]="eventForm.controls['location']?.valid">
+          Location should not be empty
+        </div>
+    </div>
+    <button [disabled]="eventForm.invalid" class="btn btn-primary btn-block">
+      <i class="fa fa-save"></i> Update
+    </button>
+  </form>
+</div>

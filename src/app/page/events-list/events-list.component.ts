@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Event } from 'src/app/model/event';
 import { EventService } from 'src/app/service/event.service';
 
@@ -10,12 +11,19 @@ import { EventService } from 'src/app/service/event.service';
 })
 export class EventsListComponent implements OnInit {
 
+  // tudom, hogy genericnek kéne lennie, de most megnézem így
+  //@Output() startEdit: EventEmitter<Event> = new EventEmitter();
   eventList: Observable<Event[]> = this.eventService.getAll();
 
   constructor(
     private eventService: EventService,
+    private router: Router,
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
+  onEdit(event: Event): void {
+    //this.startEdit.emit(event);
+    this.router.navigate(['/', 'event', event.id]);
+  }
 }
